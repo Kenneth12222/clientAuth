@@ -24,12 +24,12 @@ export function UserProvider({ children }) {
 
     const logout = async () => {
         try {
-            await logoutUser(); // Ensure the API call is successful
+            await logoutUser(); 
             setUser(null);
             setToken('');
-            localStorage.removeItem('access_token'); // Clear token from local storage
+            localStorage.removeItem('access_token');
         } catch (error) {
-            console.error('Logout failed:', error); // Log error if logout fails
+            console.error('Logout failed:', error);
         }
     };
     
