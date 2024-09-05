@@ -1,0 +1,98 @@
+/* Container styling */
+.auth-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form heading */
+.auth-container h2 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Label styling */
+.auth-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Input styling */
+.auth-container input[type="text"],
+.auth-container input[type="email"],
+.auth-container input[type="password"],
+.auth-container input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Input focus effect */
+.auth-container input:focus {
+    border-color: #ff5a5f;
+    outline: none;
+}
+
+/* Button styling */
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff5a5f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+    background-color: #e04e50;
+}
+
+/* Error message styling */
+.auth-container .error {
+    color: #ff5a5f;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Redirect link styling */
+.auth-container p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-container p a {
+    color: #ff5a5f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-container p a:hover {
+    text-decoration: underline;
+}
+
+/* File input styling */
+.auth-container input[type="file"] {
+    padding: 6px;
+}
