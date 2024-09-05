@@ -24,7 +24,7 @@ export async function registerUser(userData) {
     try {
         const response = await apiClient.post('/register', userData, {
             headers: {
-                'Content-Type': 'multipart/form-data', // Overriding headers for this specific request
+                'Content-Type': 'multipart/form-data', 
             },
         });
         return handleResponse(response);
@@ -49,7 +49,7 @@ export async function fetchProfile(token) {
     try {
         const response = await apiClient.get('/profile', {
             headers: {
-                'Authorization': `Bearer ${token}`, // Adding authorization token
+                'Authorization': `Bearer ${token}`, 
             },
         });
         return handleResponse(response);
