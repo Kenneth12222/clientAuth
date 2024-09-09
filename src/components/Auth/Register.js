@@ -1,7 +1,8 @@
 
 
 import React, { useState } from 'react';
-import { registerUser } from '../api/userApi';
+import { registerUser } from '../../api/userApi';
+import { Link } from 'react-router-dom'
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -57,6 +58,8 @@ const Register = () => {
                 <input type="file" name="profilePic" onChange={handleChange} />
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Register</button>
+                <p>Aready have an account? <Link to="/login">Login</Link></p>
+                
             </form>
         </div>
     );

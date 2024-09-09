@@ -1,7 +1,7 @@
 // src/components/ResetPassword.js
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { resetPassword } from '../api/userApi';
+import { resetPassword } from '../../api/userApi';
 
 const ResetPassword = () => {
     const { token } = useParams();
@@ -15,21 +15,20 @@ const ResetPassword = () => {
         e.preventDefault();
         setError('');
         setMessage('');
-    
+
         if (newPassword !== confirmPassword) {
             setError('Passwords do not match');
             return;
         }
-    
+
         try {
-            await resetPassword(token, newPassword);  // This will now match the backend's 'new_password'
+            await resetPassword(token, newPassword);
             setMessage('Password has been successfully reset. You can now log in with your new password.');
             setTimeout(() => navigate('/login'), 2000);
         } catch (err) {
             setError(err.message);
         }
     };
-    
 
     return (
         <div>

@@ -1,14 +1,9 @@
+
+
 import axios from 'axios';
 
 // Base API URL
 const API_URL = process.env.REACT_APP_API_URL;
-
-const apiClient = axios.create({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
 
 // Helper to handle responses and errors
 async function handleResponse(response) {
@@ -19,10 +14,9 @@ async function handleResponse(response) {
     return response.data;
 }
 
-// Register User
 export async function registerUser(userData) {
     try {
-        const response = await apiClient.post('/register', userData, {
+        const response = await axios.post(`${API_URL}/register`, userData, {
             headers: {
                 'Content-Type': 'multipart/form-data', 
             },
@@ -33,10 +27,9 @@ export async function registerUser(userData) {
     }
 }
 
-// Login User
 export async function loginUser(userData) {
     try {
-        const response = await apiClient.post('/login', userData);
+        const response = await axios.post(`${API_URL}/login`, userData);
         const data = await handleResponse(response);
         return data.access_token;
     } catch (error) {
@@ -44,10 +37,9 @@ export async function loginUser(userData) {
     }
 }
 
-// Fetch Profile
 export async function fetchProfile(token) {
     try {
-        const response = await apiClient.get('/profile', {
+        const response = await axios.get(`${API_URL}/profile`, {
             headers: {
                 'Authorization': `Bearer ${token}`, 
             },
@@ -58,10 +50,9 @@ export async function fetchProfile(token) {
     }
 }
 
-// Logout User
 export async function logoutUser() {
     try {
-        const response = await apiClient.post('/logout', {}, {
+        const response = await axios.post(`${API_URL}/logout`, {}, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
             },
@@ -79,23 +70,20 @@ export async function logoutUser() {
 // Request Password Reset
 export async function requestPasswordReset(email) {
     try {
-        const response = await apiClient.post('/request-reset', { email });
+        const response = await axios.post(`${API_URL}/request-reset`, { email });
         return handleResponse(response);
     } catch (error) {
         throw error;
     }
 }
 
-// Reset Password
 export async function resetPassword(token, newPassword) {
     try {
-        const response = await apiClient.post(`/reset-password/${token}`, {
-            new_password: newPassword,
-        });
+        const response = await axios.post(`${API_URL}/reset-password/${token}`, 
+            { new_password: newPassword });
         return handleResponse(response);
     } catch (error) {
+        console.error('Error resetting password:', error);
         throw error;
     }
 }
-
-

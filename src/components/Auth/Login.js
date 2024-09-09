@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useUser } from '../context/UserContext';
-import { loginUser } from '../api/userApi';
+import { useUser } from '../../context/UserContext';
+import { loginUser } from '../../api/userApi';
 import { Link, useNavigate } from 'react-router-dom';
-import './Auth.css';
+import '../Auth.css';
 
 function Login() {
     const [username, setUsername] = useState('');

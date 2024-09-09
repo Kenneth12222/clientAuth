@@ -1,5 +1,3 @@
-
-
 import React, { createContext, useContext, useState } from 'react';
 import { fetchProfile, logoutUser } from '../api/userApi';
 
@@ -24,7 +22,7 @@ export function UserProvider({ children }) {
 
     const logout = async () => {
         try {
-            await logoutUser(); 
+            await logoutUser();
             setUser(null);
             setToken('');
             localStorage.removeItem('access_token');
@@ -32,10 +30,9 @@ export function UserProvider({ children }) {
             console.error('Logout failed:', error);
         }
     };
-    
 
     return (
-        <UserContext.Provider value={{ user, login, logout, loading }}>
+        <UserContext.Provider value={{ user, login, logout, loading, token }}>
             {children}
         </UserContext.Provider>
     );
@@ -44,4 +41,3 @@ export function UserProvider({ children }) {
 export function useUser() {
     return useContext(UserContext);
 }
-
