@@ -5,6 +5,7 @@ import Profile from '../Profile/Profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.css';
+import Logo from '../../assets/logo.png'
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +30,7 @@ function Navbar() {
         <nav className="navbar">
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo">
-                    <img src="path-to-logo" alt="Logo" className="logo-image" />
+                    <img src={Logo} alt="Logo" className="logo-image" />
                 </Link>
                 <div className={`menu-icon ${menuOpen ? 'active' : ''}`} onClick={handleMenu}>
                     <i className={menuOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
