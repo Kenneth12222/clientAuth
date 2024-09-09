@@ -1,3 +1,14 @@
+import React from 'react'
+
+function HomePage() {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+export default HomePage
 
 // // src/pages/HomePage.js
 // import React from 'react';
