@@ -1,0 +1,92 @@
+.gallery-container {
+    max-width: 1200px; /* Limit max width */
+    margin: 20px auto; /* Center the gallery */
+    padding: 20px; /* Add padding */
+    text-align: center; /* Center text */
+}
+
+.gallery-title {
+    font-size: 2rem; /* Larger title */
+    margin-bottom: 20px; /* Space below title */
+    color: #333; /* Title color */
+}
+
+.loading-text,
+.error-text,
+.no-images-text {
+    font-size: 1.2rem; /* Consistent font size for messages */
+    color: #888; /* Lighter text color */
+}
+
+.gallery-grid {
+    column-count: 4; /* Set initial column count */
+    column-gap: 15px; /* Space between columns */
+}
+
+.gallery-item {
+    break-inside: avoid; /* Prevent item from breaking inside columns */
+    margin-bottom: 15px; /* Space between items */
+    overflow: hidden; /* Hide overflow */
+    transition: transform 0.3s; /* Transition for hover effect */
+}
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.gallery-image {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.image-modal {
+    position: fixed; /* Fixed position for modal */
+    top: 0; /* Full screen */
+    left: 0; /* Full screen */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center content */
+    align-items: center; /* Center content */
+    z-index: 100; /* Ensure modal is on top */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s; /* Fade in transition */
+}
+
+.image-modal.active {
+    opacity: 1; /* Visible when active */
+}
+
+.image-modal img {
+    max-width: 90%; /* Responsive image size */
+    max-height: 90%; /* Responsive image size */
+}
+
+.image-modal-close {
+    position: absolute; /* Position close button */
+    top: 20px; /* Position from top */
+    right: 30px; /* Position from right */
+    font-size: 2rem; /* Larger close button */
+    color: white; /* Close button color */
+    cursor: pointer; /* Pointer cursor */
+    transition: color 0.3s; /* Transition for hover effect */
+}
+
+.image-modal-close:hover {
+    color: #e60023; /* Change color on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        column-count: 2; /* 2 columns on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        column-count: 1; /* 1 column on mobile */
+    }
+}

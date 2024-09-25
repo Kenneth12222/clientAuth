@@ -1,3 +1,5 @@
+
+
 import React, { createContext, useContext, useState } from 'react';
 import { fetchProfile, logoutUser } from '../api/userApi';
 
@@ -41,3 +43,5 @@ export function UserProvider({ children }) {
 export function useUser() {
     return useContext(UserContext);
 }
+
+

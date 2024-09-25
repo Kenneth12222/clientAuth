@@ -87,3 +87,52 @@ export async function resetPassword(token, newPassword) {
         throw error;
     }
 }
+
+
+// Upload Image
+export async function uploadImage(formData, token) {
+    try {
+        const response = await axios.post(`${API_URL}/upload-image`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return handleResponse(response);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function fetchUserImages(token) {
+    try {
+        const response = await axios.get(`${API_URL}/my-images`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Ensure 'Bearer' is included
+            },
+        });
+        return handleResponse(response);
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+
+// export async function fetchUserImages(token) {
+//     try {
+//         const response = await axios.get(`${API_URL}/my-images`, {
+//             headers: {
+//                 'Authorization': `Bearer ${token}`,  // Ensure 'Bearer' is included
+//             },
+//         });
+//         return handleResponse(response);
+//     } catch (error) {
+//         throw error;
+//     }
+// }
+
+
+console.log(process.env.REACT_APP_API_URL);
+
+

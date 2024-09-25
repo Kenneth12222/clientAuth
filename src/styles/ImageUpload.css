@@ -1,0 +1,120 @@
+
+
+/* Container for the form */
+.upload-form-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Card style for form */
+.upload-form-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Title */
+.upload-form-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Label for file input with preview */
+.upload-file-label {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 120px;
+    background-color: #f2f2f2;
+    border: 2px dashed #bbb;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.upload-placeholder {
+    font-size: 1rem;
+    color: #777;
+    text-align: center;
+}
+
+.image-preview-pinterest {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hidden file input */
+.upload-input-file {
+    display: none;
+}
+
+/* Input fields */
+.upload-input-title,
+.upload-input-category,
+.upload-input-description {
+    padding: 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fafafa;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.upload-input-title:focus,
+.upload-input-category:focus,
+.upload-input-description:focus {
+    border-color: #0073e6;
+}
+
+/* Text area styling */
+.upload-input-description {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Submit button */
+.upload-button-pinterest {
+    background-color: #e60023;
+    color: white;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button-pinterest:hover {
+    background-color: #c7001a;
+}
+
+/* Error and Success Messages */
+.upload-error {
+    color: #e60023;
+    font-size: 0.8rem;
+}
+
+.upload-success {
+    color: #28a745;
+    font-size: 0.8rem;
+}
+
+

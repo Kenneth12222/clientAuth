@@ -1,0 +1,90 @@
+/* Main container for auth pages (login, register, etc.) */
+.auth-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Form card */
+.auth-form {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Input fields styling */
+.auth-form input,
+.auth-form textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fafafa;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Adjust input height for textarea */
+.auth-form textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Focus effect on input fields */
+.auth-form input:focus,
+.auth-form textarea:focus {
+    border-color: #0073e6;
+}
+
+/* Submit button styling */
+.auth-form button {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: #005bb5;
+}
+
+/* Error and Success Messages */
+.error {
+    color: #e60023;
+    font-size: 0.8rem;
+}
+
+.success {
+    color: #28a745;
+    font-size: 0.8rem;
+}
+
+/* Links */
+.auth-form p {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.auth-form a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.auth-form a:hover {
+    text-decoration: underline;
+}

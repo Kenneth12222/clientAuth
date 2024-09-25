@@ -1,176 +1,141 @@
-/* Navbar.css */
-
 .navbar {
-    width: 100%;
-    height: 80px;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease-in-out;
+  background: linear-gradient(90deg, #ffffff, #f9f9f9); /* Subtle gradient */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
 }
 
 .navbar-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px; /* Increased padding for a more spacious feel */
+  gap: 10px;
 }
 
 .navbar-logo .logo-image {
-    height: 50px;
+  height: 50px; /* Adjusted logo height */
 }
 
-.menu-icon {
-    display: none;
-    font-size: 24px;
-    color: #333;
+.search-container {
+  flex-grow: 1;
+  margin: 0 20px;
 }
 
-.menu-icon.active {
-    color: #e60023;
+.search-input {
+  width: 100%;
+  padding: 10px 20px; /* More padding for comfort */
+  border: 1px solid #e6e6e6;
+  border-radius: 30px; /* More rounded corners */
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-/* Navigation Menu */
+.search-input:focus {
+  border-color: #e60023; /* Highlight on focus */
+  box-shadow: 0 0 5px rgba(230, 0, 35, 0.5); /* Glow effect */
+}
+
 .nav-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    transition: transform 0.3s ease-in-out;
-}
-
-.nav-menu.active {
-    transform: translateX(0);
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-item {
-    margin: 0 20px;
+  margin: 0 20px; /* Spacing between items */
 }
 
 .nav-links {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    font-weight: 600;
-    transition: color 0.3s ease-in-out;
+  display: flex;
+  align-items: center; /* Center items vertically */
+  text-decoration: none;
+  color: #333;
+  font-weight: 600; /* Slightly bolder text */
+  transition: color 0.3s, transform 0.3s;
 }
 
 .nav-links:hover {
-    color: #e60023;
+  color: #e60023; /* Pinterest red on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
 }
 
-/* Profile Section */
-.nav-search-profile {
-    display: flex;
-    align-items: center;
+.nav-icon {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: 18px; /* Slightly larger icons */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
 }
 
 .profile-container {
-    position: relative;
-}
-
-.profile-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+  position: relative;
 }
 
 .profile-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    border: 2px solid #ddd;
-    margin-right: 10px;
-    transition: border-color 0.3s ease-in-out;
+  width: 45px; /* Slightly larger profile icon */
+  height: 45px; /* Slightly larger profile icon */
+  border-radius: 50%; /* Circular profile */
+  cursor: pointer;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
 .profile-icon:hover {
-    border-color: #e60023;
+  border: 2px solid #e60023; /* Pinterest red border on hover */
+  box-shadow: 0 0 8px rgba(230, 0, 35, 0.5); /* Glow effect */
 }
 
-.profile-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-}
-
-/* Dropdown Menu */
 .profile-dropdown {
-    position: absolute;
-    right: 0;
-    top: 60px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 250px;
-    padding: 10px;
-    z-index: 2000;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 20;
+  min-width: 180px; /* Ensures dropdown is a bit wider */
 }
 
-.profile-dropdown .profile-card {
-    /* Styles for profile card */
+.dropdown-item {
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #333;
+  display: block;
+  transition: background 0.3s, color 0.3s;
 }
 
-.auth-links {
-    display: flex;
-    align-items: center;
+.dropdown-item:hover {
+  background-color: #f4f4f4; /* Subtle hover effect */
+  color: #e60023; /* Change text color on hover */
 }
 
-.auth-links .nav-link {
-    margin-left: 15px;
-    font-size: 16px;
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease-in-out;
+.login-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
-.auth-links .nav-link:hover {
-    color: #e60023;
+.login-button:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .menu-icon {
-        display: block;
-    }
 
-    .nav-menu {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        border-top: 1px solid #e0e0e0;
-        transform: translateX(-100%);
-    }
-
-    .nav-menu.active {
-        transform: translateX(0);
-    }
-
-    .nav-item {
-        margin: 15px 0;
-    }
+.logout-button {
+  background-color: #e60023; /* Distinct background for logout */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Padding */
+  cursor: pointer; /* Pointer cursor */
+  transition: background 0.3s, transform 0.3s; /* Transitions */
+  width: 100%; /* Full width */
 }
-/* Navbar.css */
-.profile-icon {
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Adjust size as needed */
-    border-radius: 50%; /* Make it a circle */
-    object-fit: cover; /* Ensure the image covers the area */
-    background-color: #ddd; /* Default background color */
-    border: 2px solid #ddd; /* Optional: border to define the profile picture */
+
+.logout-button:hover {
+  color: #fff;
+  background-color: #c0001a; /* Darker red on hover */
+
 }
