@@ -1,19 +1,23 @@
 
-
+// api.js
 import axios from 'axios';
 
 // Base API URL
 const API_URL = process.env.REACT_APP_API_URL;
 
 // Helper to handle responses and errors
+// This function handles the response from the API
 async function handleResponse(response) {
+    // Check if the response status indicates an error
     if (response.status >= 400) {
-        const errorData = response.data;
+        // Extract the error message from the response
+        const errorData = response.data; // This will give you the data object from the response
         throw new Error(errorData.message || 'Something went wrong');
     }
-    return response.data;
+    return response.data; // Return the data if successful
 }
 
+// This function handles user registration
 export async function registerUser(userData) {
     try {
         const response = await axios.post(`${API_URL}/register`, userData, {
@@ -21,9 +25,12 @@ export async function registerUser(userData) {
                 'Content-Type': 'multipart/form-data', 
             },
         });
+        // Call the handleResponse function to process the response
         return handleResponse(response);
     } catch (error) {
-        throw error;
+        // Handle the error (you might want to log it or show it to the user)
+        console.error('Registration error:', error);
+        throw error; // Rethrow the error for further handling
     }
 }
 
@@ -45,10 +52,13 @@ export async function fetchProfile(token) {
             },
         });
         return handleResponse(response);
+        
     } catch (error) {
         throw error;
     }
+    
 }
+
 
 export async function logoutUser() {
     try {
@@ -76,6 +86,7 @@ export async function requestPasswordReset(email) {
         throw error;
     }
 }
+
 
 export async function resetPassword(token, newPassword) {
     try {
@@ -116,23 +127,5 @@ export async function fetchUserImages(token) {
         throw error;
     }
 }
-
-
-
-// export async function fetchUserImages(token) {
-//     try {
-//         const response = await axios.get(`${API_URL}/my-images`, {
-//             headers: {
-//                 'Authorization': `Bearer ${token}`,  // Ensure 'Bearer' is included
-//             },
-//         });
-//         return handleResponse(response);
-//     } catch (error) {
-//         throw error;
-//     }
-// }
-
-
-console.log(process.env.REACT_APP_API_URL);
 
 

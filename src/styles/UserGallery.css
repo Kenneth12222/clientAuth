@@ -1,0 +1,111 @@
+/* .user-gallery-container {
+    padding: 20px;
+} */
+
+.header-user-profile {
+    margin-bottom: 20px;
+}
+
+.gallery-container {
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners for the container */
+    padding: 20px; /* Padding inside the container */
+}
+
+.gallery-grid {
+    column-count: 4; /* Adjust the number of columns as needed */
+    column-gap: 15px; /* Space between columns */
+    margin: 20px 0;
+}
+
+.gallery-item {
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    break-inside: avoid; /* Prevents breaking of items */
+    margin-bottom: 15px; /* Space below each item */
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto; /* Ensures images keep their aspect ratio */
+    display: block;
+    transition: transform 0.2s;
+}
+
+/* .gallery-image:hover {
+    transform: scale(1.05);
+} */
+
+/* Modal Styles */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px; /* Rounded corners for modal image */
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+.hero-buttons {
+    display: flex; /* Align buttons horizontally */
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px; /* Space above the buttons */
+}
+
+.primary-button, .secondary-button {
+    padding: 10px 20px; /* Vertical and horizontal padding */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.primary-button {
+    background-color: #007bff; /* Blue background for primary button */
+    color: white; /* White text color */
+}
+
+.secondary-button {
+    background-color: #6c757d; /* Gray background for secondary button */
+    color: white; /* White text color */
+}
+
+/* Hover Effects */
+.primary-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.secondary-button:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active State */
+.primary-button:active,
+.secondary-button:active {
+    transform: translateY(0); /* Remove lift effect on click */
+}

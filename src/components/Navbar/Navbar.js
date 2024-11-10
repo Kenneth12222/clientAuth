@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
@@ -23,7 +20,7 @@ function Navbar({ setShowLogin }) {
         navigate('/');
     };
 
-    const defaultProfilePicture = '/default-avatar.png';
+    const defaultProfilePicture = '>';
 
     const handleProfileIconClick = () => {
         user ? toggleDropdown() : setShowLogin(prev => !prev);
@@ -42,25 +39,21 @@ function Navbar({ setShowLogin }) {
                     <li className="nav-item">
                         <Link to="/" className="nav-links">
                             <FontAwesomeIcon icon={faHome} className="nav-icon" />
-                       
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/public-gallery" className="nav-links">
                             <FontAwesomeIcon icon={faImages} className="nav-icon" />
-                          
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/upload-image" className="nav-links">
                             <FontAwesomeIcon icon={faCamera} className="nav-icon" />
-                        
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/my-gallery" className="nav-links">
                             <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                      
                         </Link>
                     </li>
                 </ul>
@@ -69,7 +62,7 @@ function Navbar({ setShowLogin }) {
                         <div className="profile-container">
                             <img
                                 src={user.image_url || defaultProfilePicture}
-                                alt="Profile"
+                                alt={user.name || ''}
                                 className="profile-icon"
                                 onClick={handleProfileIconClick}
                                 onError={(e) => e.target.src = defaultProfilePicture}
@@ -95,103 +88,3 @@ function Navbar({ setShowLogin }) {
 }
 
 export default Navbar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch, faBell, faCommentDots, faChevronDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-// import './Navbar.css';
-
-// import Profile from '../Profile/Profile'; 
-// import { useUser } from '../../context/UserContext';
-// import Logo from '../../assets/logo.png'
-
-// function Navbar() {
-//     const [dropdownOpen, setDropdownOpen] = useState(false);
-//     const { token, user } = useUser(); 
-
-//     const toggleDropdown = () => {
-//         setDropdownOpen(!dropdownOpen);
-//     };
-
-//     return (
-//         <nav className="pinterest">
-//             <div className="left">
-//                 <Link to="/" className="logo">
-//                     <img src={Logo} className='logo-icon' />
-//                 </Link>
-//                 <Link to="/" className="home">Home</Link>
-//             </div>
-//             <div className="search">
-//                 <FontAwesomeIcon icon={faSearch} />
-//                 <input type="search" placeholder="Search" />
-//             </div>
-//             <div className="right">
-//                 <Link to="#" className="items">
-//                     <FontAwesomeIcon icon={faBell} />
-//                 </Link>
-//                 <Link to="#" className="items">
-//                     <FontAwesomeIcon icon={faCommentDots} />
-//                 </Link>
-//                 <div className="nav-search-profile">
-//                     {token ? (
-//                         <div className="profile-container">
-//                             <button onClick={toggleDropdown} className="profile-button">
-//                                 {user?.image_url ? (
-//                                     <img
-//                                         src={user.image_url}
-//                                         alt="Profile"
-//                                         className="profile-icon"
-                                        
-//                                     />
-//                                 ) : (
-//                                     <FontAwesomeIcon icon={faUserCircle} size="2x" color="#888" />
-//                                 )}
-//                             </button>
-//                             {dropdownOpen && (
-//                                 <div className="profile-dropdown">
-//                                     <Profile />
-//                                 </div>
-//                             )}
-//                         </div>
-//                     ) : (
-//                         <div className="auth-links">
-//                             <Link to="/login" className="nav-link">Login</Link>
-//                             <Link to="/register" className="nav-link">Register</Link>
-//                         </div>
-//                     )}
-//                 </div>
-//                 <Link to="#" className="items-down">
-//                     <FontAwesomeIcon icon={faChevronDown} />
-//                 </Link>
-//             </div>
-//         </nav>
-//     );
-// }
-
-// export default Navbar;
-

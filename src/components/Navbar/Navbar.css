@@ -1,6 +1,5 @@
 .navbar {
   background: linear-gradient(90deg, #ffffff, #f9f9f9); /* Subtle gradient */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 10;
 }
@@ -9,8 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px; /* Increased padding for a more spacious feel */
-  gap: 10px;
+  padding: 15px 20px; /* Adjusted for better spacing */
+  flex-wrap: wrap; /* Allow items to wrap if necessary */
 }
 
 .navbar-logo .logo-image {
@@ -18,33 +17,35 @@
 }
 
 .search-container {
-  flex-grow: 1;
+  flex-grow: 1; 
   margin: 0 20px;
+  min-width: 200px; /* Ensures a minimum width for smaller screens */
 }
 
 .search-input {
-  width: 100%;
-  padding: 10px 20px; /* More padding for comfort */
+  width: 90%; /* Set width to 100% to fill container */
+  padding: 10px 15px; /* Adjusted padding for comfort */
   border: 1px solid #e6e6e6;
-  border-radius: 30px; /* More rounded corners */
+  border-radius: 10px; /* More rounded corners */
   outline: none;
-  transition: border 0.3s, box-shadow 0.3s;
+  transition: border 0.3s;
 }
 
 .search-input:focus {
-  border-color: #e60023; /* Highlight on focus */
-  box-shadow: 0 0 5px rgba(230, 0, 35, 0.5); /* Glow effect */
+  border-color: #fff; /* Highlight on focus */
 }
 
 .nav-menu {
   display: flex;
   list-style: none;
   margin: 0;
+  margin-right: 10px;
   padding: 0;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .nav-item {
-  margin: 0 20px; /* Spacing between items */
+  margin: 0 10px; /* Reduced spacing for better alignment */
 }
 
 .nav-links {
@@ -69,6 +70,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .profile-container {
@@ -80,12 +82,11 @@
   height: 45px; /* Slightly larger profile icon */
   border-radius: 50%; /* Circular profile */
   cursor: pointer;
-  transition: border 0.3s, box-shadow 0.3s;
+  transition: border 0.3s;
 }
 
 .profile-icon:hover {
   border: 2px solid #e60023; /* Pinterest red border on hover */
-  box-shadow: 0 0 8px rgba(230, 0, 35, 0.5); /* Glow effect */
 }
 
 .profile-dropdown {
@@ -93,7 +94,6 @@
   top: 55px;
   right: 0;
   background-color: white;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   z-index: 20;
   min-width: 180px; /* Ensures dropdown is a bit wider */
@@ -123,19 +123,45 @@
   transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
-
 .logout-button {
   background-color: #e60023; /* Distinct background for logout */
   color: white; /* White text */
   border: none; /* Remove border */
   padding: 10px 15px; /* Padding */
   cursor: pointer; /* Pointer cursor */
-  transition: background 0.3s, transform 0.3s; /* Transitions */
+  transition: background 0.3s; /* Transitions */
   width: 100%; /* Full width */
 }
 
 .logout-button:hover {
-  color: #fff;
   background-color: #c0001a; /* Darker red on hover */
+}
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar-container {
+      flex-direction: row; /* Stack elements vertically on small screens */
+      align-items: flex-start; /* Align to the start */
+  }
+
+  .search-container {
+      margin: 10px 0; /* Add spacing for small screens */
+  }
+
+  .nav-menu {
+      margin: 10px 0; /* Add spacing for small screens */
+  }
+
+  .nav-item {
+      margin: 0 5px; /* Adjust spacing for small screens */
+  }
+  input {
+    display: none;
+  }
+  .profile-container img {
+    position: absolute;
+    top: -70px;
+    right: 35px;
+    transform: translateX(100%); /* Shift dropdown to the right */
+  }
 }

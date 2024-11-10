@@ -1,7 +1,7 @@
 
-
+// context
 import React, { createContext, useContext, useState } from 'react';
-import { fetchProfile, logoutUser } from '../api/userApi';
+import { fetchImages, fetchProfile, logoutUser } from '../api/userApi';
 
 const UserContext = createContext();
 
@@ -32,6 +32,7 @@ export function UserProvider({ children }) {
             console.error('Logout failed:', error);
         }
     };
+
 
     return (
         <UserContext.Provider value={{ user, login, logout, loading, token }}>
