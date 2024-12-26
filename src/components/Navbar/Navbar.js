@@ -8,6 +8,7 @@ import Logo from '../../assets/logo.png';
 
 function Navbar({ setShowLogin }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(''); // State for search query
     const { user, logout } = useUser();
     const navigate = useNavigate();
 
@@ -20,10 +21,18 @@ function Navbar({ setShowLogin }) {
         navigate('/');
     };
 
-    const defaultProfilePicture = '>';
+    const defaultProfilePicture = faUser;
 
     const handleProfileIconClick = () => {
         user ? toggleDropdown() : setShowLogin(prev => !prev);
+    };
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery) {
+            navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+            setSearchQuery(''); // Clear search input after submission
+        }
     };
 
     return (
@@ -33,7 +42,15 @@ function Navbar({ setShowLogin }) {
                     <img src={Logo} alt="Logo" className="logo-image" />
                 </Link>
                 <div className="search-container">
-                    <input type="text" className="search-input" placeholder="Search..." />
+                    <form onSubmit={handleSearchSubmit}>
+                        <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </form>
                 </div>
                 <ul className="nav-menu">
                     <li className="nav-item">

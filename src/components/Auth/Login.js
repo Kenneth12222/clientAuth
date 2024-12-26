@@ -1,8 +1,5 @@
-
-
 import React, { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import { loginUser } from '../../api/userApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,19 +15,18 @@ function Login({ setShowLogin }) {
         e.preventDefault();
 
         try {
-            const token = await loginUser({ username, password });
-            localStorage.setItem('access_token', token);
-            login(token);
-            
+            // Call the login function from UserContext with username and password
+            await login({ username, password });
+
             // Display success toast and close the login form
             toast.success('Login successful!');
             setShowLogin(false);
 
-            // Redirect to home page
+            // Redirect to home page after a short delay
             setTimeout(() => navigate('/'), 2000);
 
         } catch (error) {
-            // Display error toast
+            // Display error toast if login fails
             toast.error(error.message || 'An error occurred during login');
         }
     };
@@ -74,8 +70,6 @@ function Login({ setShowLogin }) {
 }
 
 export default Login;
-
-
 
 
 

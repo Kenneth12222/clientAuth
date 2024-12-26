@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -15,7 +13,7 @@ const SearchResults = () => {
             setLoading(true);
             try {
                 // Replace with your API endpoint or data fetching logic
-                const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+                const response = await fetch(`/http://localhost:5000/api/search?query=${encodeURIComponent(query)}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch results');
                 }
@@ -40,7 +38,6 @@ const SearchResults = () => {
     if (error) {
         return <div>Error: {error}</div>; // Error handling
     }
-
     return (
         <div className="search-results">
             <h2>Search Results for: "{query}"</h2>

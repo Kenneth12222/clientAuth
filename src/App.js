@@ -12,6 +12,7 @@ import Navbar from './components/Navbar/Navbar';
 import ImageUpload from './components/ImageModel/ImageUpload';
 import UserGallery from './components/ImageModel/UserGallery';
 import PublicGallery from './components/ImageModel/PublicGallery';
+import SearchResults from './Search/SearchResults'
 
 function App() {
     const [showLogin, setShowLogin] = useState(false);
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/upload-image" element={<ImageUpload />} />
                     <Route path="/public-gallery" element={<PublicGallery />} />
                     <Route path="/my-gallery" element={<UserGallery />} />
+                    <Route path="/search" element={<SearchResults />} />
                 </Routes>
             </Router>
         </UserProvider>
