@@ -1,12 +1,10 @@
-
-
 import React, { useState } from 'react';
 import { uploadImage } from '../../api/userApi';
 import { useUser } from '../../context/UserContext';
-import '../../styles/ImageUpload.css';  // Updated for Pinterest-like styles
+import '../../styles/ImageUpload.css';
 
 function ImageUpload() {
-    const { token } = useUser();
+    const { token } = useUser(); // Destructure token directly
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -15,17 +13,21 @@ function ImageUpload() {
     const [success, setSuccess] = useState(null);
     const [preview, setPreview] = useState(null);
 
+    // Handle file change and preview generation
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile);
+
         if (selectedFile) {
             const fileURL = URL.createObjectURL(selectedFile);
             setPreview(fileURL);
         }
     };
 
+    // Handle form submission and image upload
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
         if (!file || !title) {
             setError('Please fill in all required fields and upload an image.');
             setSuccess(null);
@@ -40,17 +42,28 @@ function ImageUpload() {
 
         try {
             await uploadImage(formData, token);
+            resetForm();
             setSuccess('Image uploaded successfully');
             setError(null);
-            setFile(null);
-            setTitle('');
-            setDescription('');
-            setCategory('');
-            setPreview(null);
         } catch (err) {
             setError(err.message);
             setSuccess(null);
         }
+    };
+
+    // Reset form fields after successful submission
+    const resetForm = () => {
+        setFile(null);
+        setTitle('');
+        setDescription('');
+        setCategory('');
+        setPreview(null);
+    };
+
+    // Handle clearing the preview image
+    const handleRemovePreview = () => {
+        setFile(null);
+        setPreview(null);
     };
 
     return (
@@ -60,7 +73,20 @@ function ImageUpload() {
 
                 <label htmlFor="fileInput" className="upload-file-label">
                     {preview ? (
-                        <img src={preview} alt="Preview" className="image-preview-pinterest" />
+                        <div className="image-preview-container">
+                            <img
+                                src={preview}
+                                alt="Preview"
+                                className="image-preview-pinterest"
+                            />
+                            <button
+                                type="button"
+                                className="remove-preview-button"
+                                onClick={handleRemovePreview}
+                            >
+                                Remove Preview
+                            </button>
+                        </div>
                     ) : (
                         <div className="upload-placeholder">Click to select an image</div>
                     )}
@@ -109,5 +135,3 @@ function ImageUpload() {
 }
 
 export default ImageUpload;
-
-

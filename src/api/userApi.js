@@ -29,10 +29,11 @@ export const uploadImage = (formData) =>
 export const fetchUserImages = () =>
     get('/my-images', getToken());
 
+// Fetch all public images
+export const fetchImages = () => get('/api/images', getToken());
 
 
-
-
+// 
 
 
 // // api.js
