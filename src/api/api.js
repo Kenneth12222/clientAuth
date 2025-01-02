@@ -1,18 +1,16 @@
+//
 
-
-// api.js
 import axios from 'axios';
 
-// Base API URL from environment
 export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 const MAX_RETRIES = 3;
+
 // Handles all API requests
 async function apiRequest(method, path, data = null, token = null, contentType = 'application/json', retries = 0) {
     const headers = {
         'Content-Type': contentType,
-        ...(token && { 'Authoeization': `Bearer ${token}` }),
+        ...(token && { Authorization: `Bearer ${token}` }), // Fix typo
     };
-    if (token) headers['Authorization'] = `Bearer ${token}`;
 
     try {
         const response = await axios({
@@ -24,11 +22,15 @@ async function apiRequest(method, path, data = null, token = null, contentType =
         return response.data;
     } catch (error) {
         if (retries < MAX_RETRIES && error.response?.status >= 500) {
-            console.warn(`Retrying request to ${path}...(${retries + 1}/${MAX_RETRIES})`)
-            await new Promise(resolve => setTimeout(resolve, 1000 * (retries + 1)))
-            return apiRequest(method, path, data, token, contentType, retries + 1)
-        } 
-        return { error: error.response ? error.response.data : 'Unknown error' }
+            console.warn(`Retrying request to ${path}...(${retries + 1}/${MAX_RETRIES})`);
+            await new Promise((resolve) => setTimeout(resolve, 1000 * (retries + 1)));
+            return apiRequest(method, path, data, token, contentType, retries + 1);
+        }
+
+        // Return detailed error information
+        const errorMessage = error.response?.data || 'Unknown error';
+        const status = error.response?.status || 'No status code';
+        return { error: errorMessage, status };
     }
 }
 
@@ -49,4 +51,4 @@ export function del(path, token) {
     return apiRequest('delete', path, null, token);
 }
 
-
+// 

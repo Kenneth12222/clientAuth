@@ -3,21 +3,32 @@
 // UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { loginUser, fetchProfile, logoutUser } from '../api/userApi';
+import { getToken, setToken, clearToken } from '../authUtils/authUtils';
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem('access_token'));
+    const [token, setTokenState] = useState(getToken());
     const [loading, setLoading] = useState(false);
+
+    // Helper function to load user profile
+    const loadUserProfile = async (token) => {
+        try {
+            const profile = await fetchProfile(token);
+            setUser(profile.user);
+        } catch (error) {
+            console.error('Failed to fetch user profile:', error);
+        }
+    };
 
     // Function to log in a user
     const login = async (credentials) => {
         setLoading(true);
         try {
             const userToken = await loginUser(credentials);
-            setToken(userToken);
-            localStorage.setItem('access_token', userToken);
+            setTokenState(userToken);
+            setToken(userToken); // Save token to localStorage
             await loadUserProfile(userToken);
         } catch (error) {
             console.error('Login failed:', error);
@@ -26,24 +37,14 @@ export function UserProvider({ children }) {
         }
     };
 
-    // Fetch user profile and set user state
-    const loadUserProfile = async (userToken) => {
-        try {
-            const profile = await fetchProfile(userToken);
-            setUser(profile.user);
-        } catch (error) {
-            console.error('Fetching profile failed:', error);
-        }
-    };
-
-    // Logout functionality
+    // Function to log out a user
     const logout = async () => {
         setLoading(true);
         try {
             await logoutUser();
             setUser(null);
-            setToken(null);
-            localStorage.removeItem('access_token');
+            setTokenState(null);
+            clearToken(); // Clear token from localStorage
         } catch (error) {
             console.error('Logout failed:', error);
         } finally {
@@ -51,9 +52,11 @@ export function UserProvider({ children }) {
         }
     };
 
+    // Automatically load user profile on token change
     useEffect(() => {
-        // Load user profile if token is found in localStorage
-        if (token) loadUserProfile(token);
+        if (token) {
+            loadUserProfile(token);
+        }
     }, [token]);
 
     return (
@@ -63,7 +66,10 @@ export function UserProvider({ children }) {
     );
 }
 
-// Custom hook to access user context
+// Custom hook for consuming user context
 export function useUser() {
     return useContext(UserContext);
 }
+
+
+// 
