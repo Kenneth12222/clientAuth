@@ -110,3 +110,4 @@ const PublicGallery = () => {
 };
 
 export default PublicGallery;
+
