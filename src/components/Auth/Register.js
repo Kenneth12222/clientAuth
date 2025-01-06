@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import '../../styles/Register.css';
 import { registerUser } from '../../api/userApi';
@@ -7,19 +5,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Reusable InputField Component
-const InputField = ({ type, name, value, onChange, placeholder, required = false }) => (
-    <input
-        type={type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        required={required}
-    />
+const InputField = ({ type, name, value, onChange, placeholder, required = false, error }) => (
+    <div className="input-group">
+        <input
+            type={type}
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            required={required}
+            className={error ? 'error' : ''}
+        />
+        {error && <span className="error-message">{error}</span>}
+    </div>
 );
 
-// Reusable Textarea Component
 const TextareaField = ({ name, value, onChange, placeholder }) => (
     <textarea
         name={name}
@@ -39,7 +39,9 @@ const Register = () => {
         nationality: '',
         profilePic: null,
     });
+    const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const [preview, setPreview] = useState(null);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -48,18 +50,22 @@ const Register = () => {
             ...formData,
             [name]: name === 'profilePic' ? files[0] : value,
         });
+
+        if (name === 'profilePic' && files[0]) {
+            setPreview(URL.createObjectURL(files[0]));
+        }
     };
 
     const validateForm = () => {
-        if (!formData.username || !formData.email || !formData.password) {
-            toast.error('Please fill in all required fields.');
-            return false;
-        }
-        if (formData.password.length < 6) {
-            toast.error('Password must be at least 6 characters long.');
-            return false;
-        }
-        return true;
+        const newErrors = {};
+        if (!formData.username) newErrors.username = 'Username is required';
+        if (!formData.email) newErrors.email = 'Email is required';
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
+        if (!formData.password) newErrors.password = 'Password is required';
+        else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
@@ -97,6 +103,7 @@ const Register = () => {
                         onChange={handleChange}
                         placeholder="Username"
                         required
+                        error={errors.username}
                     />
                     <InputField
                         type="email"
@@ -105,6 +112,7 @@ const Register = () => {
                         onChange={handleChange}
                         placeholder="Email"
                         required
+                        error={errors.email}
                     />
                     <InputField
                         type="password"
@@ -113,6 +121,7 @@ const Register = () => {
                         onChange={handleChange}
                         placeholder="Password"
                         required
+                        error={errors.password}
                     />
                     <TextareaField
                         name="bio"
@@ -134,11 +143,14 @@ const Register = () => {
                         onChange={handleChange}
                         placeholder="Nationality"
                     />
-                    <input
-                        type="file"
-                        name="profilePic"
-                        onChange={handleChange}
-                    />
+                    <div className="file-input">
+                        <input
+                            type="file"
+                            name="profilePic"
+                            onChange={handleChange}
+                        />
+                        {preview && <img src={preview} alt="Profile preview" className="preview-image" />}
+                    </div>
                     <button type="submit" disabled={loading}>
                         {loading ? 'Registering...' : 'Register'}
                     </button>

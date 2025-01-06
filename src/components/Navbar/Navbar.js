@@ -52,27 +52,29 @@ function Navbar({ setShowLogin }) {
                         />
                     </form>
                 </div>
-                <ul className="nav-menu">
-                    <li className="nav-item">
-                        <Link to="/" className="nav-links">
-                            <FontAwesomeIcon icon={faHome} className="nav-icon" />
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/public-gallery" className="nav-links">
-                            <FontAwesomeIcon icon={faImages} className="nav-icon" />
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/upload-image" className="nav-links">
-                            <FontAwesomeIcon icon={faCamera} className="nav-icon" />
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/my-gallery" className="nav-links">
-                            <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                        </Link>
-                    </li>
+                <ul className="nav-menu mediascreen">
+                    <div className='phone-screen'>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-links">
+                                <FontAwesomeIcon icon={faHome} className="nav-icon" />
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/public-gallery" className="nav-links">
+                                <FontAwesomeIcon icon={faImages} className="nav-icon" />
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/upload-image" className="nav-links">
+                                <FontAwesomeIcon icon={faCamera} className="nav-icon" />
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/my-gallery" className="nav-links">
+                                <FontAwesomeIcon icon={faUser} className="nav-icon" />
+                            </Link>
+                        </li>
+                    </div>
                 </ul>
                 <div className='navbar-right'>
                     {user ? (
@@ -105,3 +107,5 @@ function Navbar({ setShowLogin }) {
 }
 
 export default Navbar;
+
+

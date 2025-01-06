@@ -1,5 +1,3 @@
-// 
-
 import React, { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -23,42 +21,42 @@ const InputField = ({ label, type, value, onChange, id }) => (
 );
 
 function Login({ setShowLogin }) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({ username: '', password: '' });
     const { login, loading } = useUser();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData((prev) => ({ ...prev, [id]: value }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (isSubmitting) return; // Prevent multiple submissions
+        if (isSubmitting) return;
 
         setIsSubmitting(true);
         try {
-            // Call the login function from UserContext
-            await login({ username, password });
+            await login(formData);
 
-            // Display success toast and close the login form
             toast.success('Login successful!');
             setShowLogin(false);
 
-            // Redirect to home page after a short delay
             setTimeout(() => navigate('/'), 2000);
         } catch (error) {
-            // Handle different types of errors explicitly
-            if (error.response?.status === 401) {
-                toast.error('Invalid username or password. Please try again.');
-            } else {
-                toast.error(error.message || 'An unexpected error occurred. Please try again later.');
-            }
+            const errorMessage =
+                error.response?.status === 401
+                    ? 'Invalid username or password. Please try again.'
+                    : error.message || 'An unexpected error occurred. Please try again later.';
+            toast.error(errorMessage);
         } finally {
             setIsSubmitting(false);
         }
     };
 
     return (
-        <>
+        <div>
             <div className="overlay" onClick={() => setShowLogin(false)}></div>
             <div className="form">
                 <ToastContainer
@@ -76,30 +74,36 @@ function Login({ setShowLogin }) {
                         <InputField
                             label="Username:"
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={formData.username}
+                            onChange={handleChange}
                             id="username"
                         />
                         <InputField
                             label="Password:"
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={formData.password}
+                            onChange={handleChange}
                             id="password"
                         />
-                        <button type="submit" disabled={loading || isSubmitting}>
+                        <button
+                            type="submit"
+                            disabled={loading || isSubmitting}
+                            aria-busy={loading || isSubmitting}
+                        >
                             {loading || isSubmitting ? 'Logging in...' : 'Login'}
                         </button>
-                        <p>Don't have an account? <Link to="/register">Register</Link></p>
-                        <p>Forgot your password? <Link to="/request-password-reset">Reset Password</Link></p>
+                        <p>
+                            Don't have an account? <Link to="/register">Register</Link>
+                        </p>
+                        <p>
+                            Forgot your password?{' '}
+                            <Link to="/request-password-reset">Reset Password</Link>
+                        </p>
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
 export default Login;
-
-
-// 

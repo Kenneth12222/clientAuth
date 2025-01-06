@@ -1,6 +1,3 @@
-
-
-// UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { loginUser, fetchProfile, logoutUser } from '../api/userApi';
 import { getToken, setToken, clearToken } from '../authUtils/authUtils';
@@ -11,29 +8,37 @@ export function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const [token, setTokenState] = useState(getToken());
     const [loading, setLoading] = useState(false);
+    const [loginLoading, setLoginLoading] = useState(false);
+    const [profileLoading, setProfileLoading] = useState(false);
 
     // Helper function to load user profile
-    const loadUserProfile = async (token) => {
+    const loadUserProfile = async () => {
+        if (!token) return;
+        setProfileLoading(true);
         try {
-            const profile = await fetchProfile(token);
+            const profile = await fetchProfile();
             setUser(profile.user);
         } catch (error) {
             console.error('Failed to fetch user profile:', error);
+            clearToken();
+            setTokenState(null);
+        } finally {
+            setProfileLoading(false);
         }
     };
 
     // Function to log in a user
     const login = async (credentials) => {
-        setLoading(true);
+        setLoginLoading(true);
         try {
             const userToken = await loginUser(credentials);
             setTokenState(userToken);
             setToken(userToken); // Save token to localStorage
-            await loadUserProfile(userToken);
+            await loadUserProfile();
         } catch (error) {
             console.error('Login failed:', error);
         } finally {
-            setLoading(false);
+            setLoginLoading(false);
         }
     };
 
@@ -54,13 +59,21 @@ export function UserProvider({ children }) {
 
     // Automatically load user profile on token change
     useEffect(() => {
-        if (token) {
-            loadUserProfile(token);
-        }
+        loadUserProfile();
     }, [token]);
 
     return (
-        <UserContext.Provider value={{ user, token, loading, login, logout }}>
+        <UserContext.Provider
+            value={{
+                user,
+                token,
+                loading,
+                loginLoading,
+                profileLoading,
+                login,
+                logout,
+            }}
+        >
             {children}
         </UserContext.Provider>
     );
@@ -70,6 +83,3 @@ export function UserProvider({ children }) {
 export function useUser() {
     return useContext(UserContext);
 }
-
-
-// 

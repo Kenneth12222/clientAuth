@@ -1,3 +1,5 @@
+
+/* navbar.css */
 .navbar {
   background: linear-gradient(90deg, #ffffff, #f9f9f9); /* Subtle gradient */
   position: relative;
@@ -10,6 +12,7 @@
   justify-content: space-between;
   padding: 15px 20px; /* Adjusted for better spacing */
   flex-wrap: wrap; /* Allow items to wrap if necessary */
+  position: relative;
 }
 
 .navbar-logo .logo-image {
@@ -35,7 +38,7 @@
   border-color: #fff; /* Highlight on focus */
 }
 
-.nav-menu {
+.phone-screen {
   display: flex;
   list-style: none;
   margin: 0;
@@ -148,8 +151,16 @@
       margin: 10px 0; /* Add spacing for small screens */
   }
 
-  .nav-menu {
-      margin: 10px 0; /* Add spacing for small screens */
+  .mediascreen {
+      margin: -70% 0; /* Add spacing for small screens */
+      background-color: #333;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
   }
 
   .nav-item {
@@ -163,5 +174,20 @@
     top: -70px;
     right: 35px;
     transform: translateX(100%); /* Shift dropdown to the right */
+  }
+  .phone-screen {
+    gap: 50px;
+    background-color: #fff;
+    padding: 20px 0px;
+    width: 15%;
+    border-radius: 50px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .phone-screen .nav-item {
+    margin-left: 12px;
   }
 }
